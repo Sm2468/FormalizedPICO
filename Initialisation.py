@@ -1,8 +1,8 @@
 from Bio import Entrez, Medline
 
 #Initialisation
-Entrez.api_key = "6156daa8c7104e81363c7b4373a4a458d708"
-Entrez.email = "selma2468@gmail.com"
+Entrez.api_key = "example"
+Entrez.email = "example@gmail.com"
 
 TERM = input('input query: ')
 
