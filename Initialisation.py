@@ -1,8 +1,8 @@
 from Bio import Entrez, Medline
 
 #Initialisation
-Entrez.api_key = "example"
-Entrez.email = "example@gmail.com"
+Entrez.api_key = "6156daa8c7104e81363c7b4373a4a458d708"
+Entrez.email = "selma2468@gmail.com"
 
 TERM = input('input query: ')
 
@@ -17,15 +17,14 @@ handle = Entrez.esearch(db="pubmed",
                         retmax='30',
                         sort='relevance',
                         retmode='xml',
-                        #mindate=,
-                        maxdate= '2005/11/05')
+                        mindate= '2019/06/10')
+                        #maxdate = )
 record = Entrez.read(handle)
 handle.close()
 idlist = record["IdList"]
 for i in idlist:
-    if i == '16437530':
+    if i == '16437530': #delete the PMID of the Systematic Review itself
         idlist.remove(i)
-
 print(idlist)
 
 #downloading the corresponding MEDLINE records
@@ -34,10 +33,8 @@ handle = Entrez.efetch(db="pubmed",
 records = Medline.parse(handle)
 records = list(records)
 output = []
-tweede = []
+
 for record in records:
-    #if record[PMID] == '27631535':
-        #records.remove(record)
     print("Title:", record.get("TI", "?"))
     print("PMID:", record.get("PMID", "?"))
     if 'MH' in record:
@@ -51,7 +48,6 @@ for record in records:
         print('no abstract found')
     output.append(record["TI"])
     output.append(record["PMID"])
-
     print("")
 
 with open('bp_results.txt', 'w') as f:
